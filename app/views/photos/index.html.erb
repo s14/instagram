@@ -1,44 +1,38 @@
-<div class="page-header">
-  <h1>Photos</h1>
-</div>
+<hr>
 
-<p><a href="/photos/new" class="btn btn-primary">Add a New Photo</a></p>
-
-<table class="table table-hover">
-  <thead>
-    <tr>
-      <th>Image url</th>
-      <th>Caption</th>
-      <th>User</th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @photos.each do |photo| %>
-      <tr>
-        <td><%= photo.image_url %></td>
-        <td><%= photo.caption %></td>
-        <td><%= photo.user_id %></td>
-        <td>
-          <a href="/photos/<%= photo.id %>" class="btn btn-primary">
-            <i class="fa fa-search-plus"></i>
+<% @photos.each do |photo| %>
+  <div class="row" id="photo_<%= photo.id %>">
+    <div class="col-md-2 col-md-offset-1">
+      <div class="pull-left">
+        <p class="text-right">
+          <a href="/users/<%= photo.owner.id %>">
+            <%= photo.owner.username %>
           </a>
-        </td>
-        <td>
-          <a href="/photos/<%= photo.id %>/edit" class="btn btn-warning">
-            <i class="fa fa-edit"></i>
-          </a>
-        </td>
-        <td>
-          <a href="/delete_photo/<%= photo.id %>" class="btn btn-danger">
-            <i class="fa fa-trash-o"></i>
-          </a>
-        </td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
+        </p>
+        <p class="text-right"><%= time_ago_in_words(photo.created_at) %> ago</p>
+      </div>
+      <div class="pull-right">
+        <img src="<%= photo.owner.avatar_url %>" class="img-responsive pull-right">
+      </div>
+    </div>
+    <div class="col-md-6 well">
+      <div class="thumbnail">
+        <img src="<%= photo.image_url %>">
+        <div class="caption">
+          <p class="lead"><%= photo.caption %></p>
+          <p>
+            <a href="/photos/<%= photo.id %>" class="btn btn-primary">
+              <i class="fa fa-search-plus"></i>
+            </a>
+            <a href="/photos/<%= photo.id %>/edit" class="btn btn-warning">
+              <i class="fa fa-edit"></i>
+            </a>
+            <a href="/delete_photo/<%= photo.id %>" class="btn btn-danger">
+              <i class="fa fa-trash-o"></i>
+            </a>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>
