@@ -12,4 +12,17 @@
   <dt>User</dt>
   <dd><%= @photo.user_id %></dd>
 
+  <dt>Comments</dt>
+  <dd>
+    <ul>
+      <% @photo.comments.each do |comment| %>
+        <li><%= comment.content %></li>
+      <% end %>
+      <li>
+        <input type="text">
+      </li>
+    </ul>
+  </dd>
 </dl>
+
+
