@@ -18,14 +18,35 @@ class User < ActiveRecord::Base
 
   # has many favorite_photos
   def favorite_photos
-    return Photo.where({ :id => favoritings.pluck(:photo_id) })
+    return Photo.where({ :id => self.favoritings.pluck(:photo_id) })
   end
 
   # Hard part
 
   # has many followings_where_leader
+  def followings_where_leader
+    return Following.where({ :leader_id => self.id })
+  end
   # has many followers
+  def followers
+    return User.where({ :id => self.followings_where_leader.pluck(:follower_id) })
+  end
 
   # has many followings_where_follower
+  def followings_where_follower
+    return Following.where({ :follower_id => self.id })
+  end
+
   # has many leaders
+  def leaders
+    return User.where({ :id => self.followings_where_follower.pluck(:leader_id) })
+  end
 end
+
+
+
+
+
+
+
+
