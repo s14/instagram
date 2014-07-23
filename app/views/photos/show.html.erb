@@ -21,7 +21,7 @@
       <li>
         <form action="/create_comment">
           <input name="content" type="text">
-          <%= select_tag(:user_id, options_from_collection_for_select(User.all, :id, :username)) %>
+          <input type="hidden" name="user_id" value="<%= current_user.id %>">
           <input type="hidden" name="photo_id" value="<%= @photo.id %>">
           <input type="submit" value="Add Comment">
         </form>

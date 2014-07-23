@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  devise_for :users
+  root("photos#index")
+
   # Routes for the Following resource:
   # CREATE
   get('/followings/new', { :controller => 'followings', :action => 'new' })
