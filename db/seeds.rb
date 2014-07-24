@@ -85,3 +85,10 @@ Photo.all.each do |photo|
 end
 
 puts "There are now #{Comment.count} comments."
+
+following = Following.new
+following.follower_id = User.find_by({ :username => "rugb" }).id
+following.leader_id = User.find_by({ :username => "jack" }).id
+following.save
+
+puts "There are now #{Following.count} followings."

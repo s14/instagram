@@ -25,12 +25,11 @@ class User < ActiveRecord::Base
     return Photo.where({ :id => self.favoritings.pluck(:photo_id) })
   end
 
-  # Hard part
-
   # has many followings_where_leader
   def followings_where_leader
     return Following.where({ :leader_id => self.id })
   end
+
   # has many followers
   def followers
     return User.where({ :id => self.followings_where_leader.pluck(:follower_id) })
@@ -44,6 +43,21 @@ class User < ActiveRecord::Base
   # has many leaders
   def leaders
     return User.where({ :id => self.followings_where_follower.pluck(:leader_id) })
+  end
+
+
+  # Homework
+
+  def timeline
+    # This method should return all the photos that belong to
+    #   my leaders (users that I follow)
+  end
+
+  # CHALLENGE
+  def timeline_including_favorites
+    # I like Rose's idea from the end of class. This method should
+    #   return all the photos from the timeline method, plus
+    #   photos that my leaders have favorited as well.
   end
 end
 
