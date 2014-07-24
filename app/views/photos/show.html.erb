@@ -19,11 +19,10 @@
         <li><%= comment.content %></li>
       <% end %>
       <li>
-        <form action="/create_comment">
-          <input name="content" type="text">
-          <input type="hidden" name="user_id" value="<%= current_user.id %>">
-          <input type="hidden" name="photo_id" value="<%= @photo.id %>">
-          <input type="submit" value="Add Comment">
+        <form action="...">
+          <input type="..." name="content" class="form-control">
+          <input type="..." name="user_id" value="...">
+          <input type="..." name="photo_id" value="...">
         </form>
       </li>
     </ul>
