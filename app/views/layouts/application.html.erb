@@ -38,17 +38,15 @@
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-        <li><a href="/followings">Followings</a></li>
-        <li><a href="/users">Users</a></li>
-        <li><a href="/favoritings">Favoritings</a></li>
-        <li><a href="/comments">Comments</a></li>
-        <li><a href="/photos">Photos</a></li>
-        <li><a href="#">About</a></li>
+        <li><a href="/my_timeline"><i class="fa fa-clock-o"></i></a></li>
+        <li><a href="/my_favorites"><i class="fa fa-heart"></i></a></li>
+        <li><a href="/photos/new"><i class="fa fa-camera-retro"></i></a></li>
+        <li><a href="/users/new"><i class="fa fa-users"></i></a></li>
       </ul>
 
       <ul class="nav navbar-nav navbar-right">
-        <% if false %>
-          <li><a href="/users/edit">Oscar the Grouch</a></li>
+        <% if current_user.present? %>
+          <li><a href="/users/edit"><%= current_user.username %></a></li>
           <li><a href="/users/sign_out" data-method="delete">Sign out</a></li>
         <% else %>
           <li><a href="/users/sign_up">Sign up</a></li>

@@ -31,21 +31,27 @@
               <i class="fa fa-trash-o"></i>
             </a>
           </p>
-          <ul>
-            <% photo.comments.each do |comment| %>
-              <li><%= comment.content %></li>
-            <% end %>
-            <li>
-              <form action="/create_comment">
-                <input name="content" type="text">
-                <input type="hidden" name="user_id" value="<%= current_user.id %>">
-                <input type="hidden" name="photo_id" value="<%= photo.id %>">
-                <input type="submit" value="Add Comment">
-              </form>
-            </li>
-          </ul>
         </div>
       </div>
+      <ul class="media-list">
+        <% photo.comments.each do |comment| %>
+          <li class="media">
+            <a class="pull-left" href="/users/2">
+              <img class="media-object" src="<%= comment.user.avatar_url %>">
+            </a>
+            <div class="media-body">
+              <p class="lead"><%= comment.content %></p>
+            </div>
+          </li>
+        <% end %>
+        <li class="media">
+          <form action="/create_comment">
+            <input name="content" type="text" class="form-control">
+            <input type="hidden" name="user_id" value="<%= current_user.id %>">
+            <input type="hidden" name="photo_id" value="<%= photo.id %>">
+          </form>
+        </li>
+      </ul>
     </div>
   </div>
 <% end %>

@@ -9,11 +9,17 @@
 user = User.new
 user.username = "rugb"
 user.avatar_url = "https://graph.facebook.com/rbetina/picture"
+user.email = "raghu@example.com"
+user.password = "colts123"
+user.password_confirmation = "colts123"
 user.save
 
 user = User.new
 user.username = "jack"
 user.avatar_url = "https://graph.facebook.com/jack.mallers/picture"
+user.email = "jack@example.com"
+user.password = "lions123"
+user.password_confirmation = "lions123"
 user.save
 
 puts "There are now #{User.count} users."
