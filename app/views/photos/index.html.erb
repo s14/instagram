@@ -45,10 +45,10 @@
           </li>
         <% end %>
         <li class="media">
-          <form action="...">
-            <input type="..." name="content" class="form-control">
-            <input type="..." name="user_id" value="...">
-            <input type="..." name="photo_id" value="...">
+          <form action="/create_comment">
+            <input type="text" name="content" class="form-control">
+            <input type="hidden" name="user_id" value="<%= current_user.id %>">
+            <input type="hidden" name="photo_id" value="<%= photo.id %>">
           </form>
         </li>
       </ul>

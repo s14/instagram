@@ -1,4 +1,16 @@
 class UsersController < ApplicationController
+  def timeline
+    @photos = current_user.timeline_including_favorites.order("created_at DESC")
+
+    render('photos/index')
+  end
+
+  def favorites
+    @photos = current_user.favorite_photos.order("created_at DESC")
+
+    render('photos/index')
+  end
+
   def index
     @users = User.all
   end

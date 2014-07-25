@@ -1,6 +1,6 @@
 class PhotosController < ApplicationController
   def index
-    @photos = current_user.timeline_including_favorites
+    @photos = Photo.all.order("created_at DESC")
   end
 
   def show

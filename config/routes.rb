@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  get("/my_timeline", { :controller => "users", :action => "timeline" })
+  get("/my_favorites", { :controller => "users", :action => "favorites" })
+
   devise_for :users
   root("photos#index")
 
