@@ -1,10 +1,23 @@
 class PhotosController < ApplicationController
+  before_action(:set_photo, { :only => [:show, :edit, :update, :destroy] })
+
+  before_action(:ensure_current_user_is_photo_owner, { :only => [:edit, :destroy, :update] })
+
+  def ensure_current_user_is_photo_owner
+    if current_user != @photo.owner
+      redirect_to "/", :notice => "Nice try, suckah!"
+    end
+  end
+
+  def set_photo
+    @photo = Photo.find(params[:id])
+  end
+
   def index
     @photos = Photo.all.order("created_at DESC")
   end
 
   def show
-    @photo = Photo.find(params[:id])
   end
 
   def new
@@ -15,7 +28,7 @@ class PhotosController < ApplicationController
     @photo = Photo.new
     @photo.image_url = params[:image_url]
     @photo.caption = params[:caption]
-    @photo.user_id = params[:user_id]
+    @photo.user_id = current_user.id
 
     if @photo.save
       redirect_to "/photos", :notice => "Photo created successfully."
@@ -25,12 +38,9 @@ class PhotosController < ApplicationController
   end
 
   def edit
-    @photo = Photo.find(params[:id])
   end
 
   def update
-    @photo = Photo.find(params[:id])
-
     @photo.image_url = params[:image_url]
     @photo.caption = params[:caption]
     @photo.user_id = params[:user_id]
@@ -43,8 +53,6 @@ class PhotosController < ApplicationController
   end
 
   def destroy
-    @photo = Photo.find(params[:id])
-
     @photo.destroy
 
     redirect_to "/photos", :notice => "Photo deleted."
