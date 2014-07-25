@@ -13,11 +13,11 @@ class FavoritingsController < ApplicationController
 
   def create
     @favoriting = Favoriting.new
-    @favoriting.user_id = params[:user_id]
+    @favoriting.user_id = current_user.id
     @favoriting.photo_id = params[:photo_id]
 
     if @favoriting.save
-      redirect_to "/favoritings", :notice => "Favoriting created successfully."
+      redirect_to :back, :notice => "Photo added to your favorites!"
     else
       render 'new'
     end
