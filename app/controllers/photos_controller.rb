@@ -27,6 +27,7 @@ class PhotosController < ApplicationController
   def create
     @photo = Photo.new
     @photo.image_url = params[:image_url]
+    @photo.photo_file = params[:photo_file]
     @photo.caption = params[:caption]
     @photo.user_id = current_user.id
 

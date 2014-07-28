@@ -1,4 +1,7 @@
 class Photo < ActiveRecord::Base
+
+  mount_uploader :photo_file, PhotoFileUploader
+
   # belongs to one user (the owner)
   def owner
     return User.find_by({ :id => self.user_id })
