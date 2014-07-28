@@ -3,8 +3,16 @@ class PhotosController < ApplicationController
 
   before_action(:ensure_current_user_is_photo_owner, { :only => [:edit, :destroy, :update] })
 
+  # before_action(:ensure_admin, { :only => [:create] })
+
+  # def ensure_admin
+  #   if current_user.email != "raghu@example.com"
+  #     redirect_to "/", :notice => "Must be site admin for that."
+  #   end
+  # end
+
   def ensure_current_user_is_photo_owner
-    if current_user != @photo.owner
+    if current_user != @photo.owner || current_user.email != "raghu@example.com"
       redirect_to "/", :notice => "Nice try, suckah!"
     end
   end
