@@ -3,11 +3,12 @@ Rails.application.routes.draw do
   get("/my_favorites", { :controller => "users", :action => "favorites" })
 
   devise_for :users
-  root("photos#index")
+  root "photos#index"
 
   # Routes for the Following resource:
   # CREATE
-  get('/followings/new', { :controller => 'followings', :action => 'new' })
+  get '/followings/new' => 'followings#new'
+
   get('/create_following', { :controller => 'followings', :action => 'create' })
 
   # READ
@@ -45,7 +46,7 @@ Rails.application.routes.draw do
   get('/create_favoriting', { :controller => 'favoritings', :action => 'create' })
 
   # READ
-  get('/favoritings', { :controller => 'favoritings', :action => 'index' })
+  get '/favoritings', controller: 'favoritings', action: 'index'
   get('/favoritings/:id', { :controller => 'favoritings', :action => 'show' })
 
   # UPDATE
