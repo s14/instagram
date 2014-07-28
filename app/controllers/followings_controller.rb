@@ -17,7 +17,7 @@ class FollowingsController < ApplicationController
     @following.leader_id = params[:leader_id]
 
     if @following.save
-      redirect_to "/followings", :notice => "Following created successfully."
+      redirect_to "/", :notice => "Following created successfully."
     else
       render 'new'
     end
