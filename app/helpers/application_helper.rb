@@ -19,6 +19,6 @@ module ApplicationHelper
 
   # Returns the URL to delete a photo
   def delete_photo_url(object)
-    return "/delete_photo/#{object.id}"
+    return "/photos/#{object.id}"
   end
 end

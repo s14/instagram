@@ -77,7 +77,7 @@ Rails.application.routes.draw do
   # Routes for the Photo resource:
   # CREATE
   get('/photos/new', { :controller => 'photos', :action => 'new' })
-  post('/create_photo', { :controller => 'photos', :action => 'create' })
+  post('/photos', { :controller => 'photos', :action => 'create' })
 
   # READ
   get('/photos', { :controller => 'photos', :action => 'index' })
@@ -85,10 +85,10 @@ Rails.application.routes.draw do
 
   # UPDATE
   get('/photos/:id/edit', { :controller => 'photos', :action => 'edit' })
-  get('/update_photo/:id', { :controller => 'photos', :action => 'update' })
+  patch('/photos/:id', { :controller => 'photos', :action => 'update' })
 
   # DELETE
-  get('/delete_photo/:id', { :controller => 'photos', :action => 'destroy' })
+  delete('/photos/:id', { :controller => 'photos', :action => 'destroy' })
   #------------------------------
 
   # The priority is based upon order of creation: first created -> highest priority.

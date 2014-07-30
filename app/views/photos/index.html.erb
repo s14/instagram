@@ -47,7 +47,9 @@
                 </a> -->
                 <%= link_to("<i class=\"fa fa-trash-o\"></i>".html_safe,
                             delete_photo_url(photo),
-                            :class => "btn btn-danger") %>
+                            :class => "btn btn-danger",
+                            :method => "delete",
+                            :data => { :confirm => "Are you suuuuuuure?" }) %>
               <% end %>
 
               <% if current_user.favorite_photos.include?(photo) %>

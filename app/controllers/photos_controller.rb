@@ -50,7 +50,7 @@ class PhotosController < ApplicationController
   end
 
   def update
-    @photo.image_url = params[:image_url]
+    @photo.photo_file = params[:photo_file]
     @photo.caption = params[:caption]
     @photo.user_id = params[:user_id]
 

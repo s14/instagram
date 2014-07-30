@@ -11,51 +11,79 @@
   <% end %>
 <% end %>
 
-<form action="/update_photo/<%= @photo.id %>" class="form-horizontal">
+<!-- <form action="/update_photo/<%= @photo.id %>" class="form-horizontal"> -->
+
+<%= form_tag("/update_photo/#{@photo.id}", :class => "form-horizontal", :enctype => "multipart/form-data", :method => "patch") do %>
+
   <!-- Label and input for image_url -->
   <div class="form-group">
-    <label for="image_url" class="col-sm-2 control-label">
-      Image url
-    </label>
+
+<!--<label for="image_url" class="col-sm-2 control-label">
+      Image URL
+    </label> -->
+
+    <%= label_tag(:image_url, "Image URL", { :class => "col-sm-2 control-label" }) %>
+
     <div class="col-sm-10">
-      <input type="text" id="image_url" name="image_url" placeholder="Image url" class="form-control" value="<%= @photo.image_url %>">
+
+      <!-- <input type="text" id="image_url" name="image_url" placeholder="Image url" class="form-control" value="<%= @photo.image_url %>"> -->
+
+      <%= text_field_tag(:image_url, @photo.image_url, { :class => "form-control", :placeholder => "Image URL" }) %>
+
+    </div>
+  </div>
+
+  <!-- Label and input for photo_file -->
+  <div class="form-group">
+
+<!--<label for="photo_file" class="col-sm-2 control-label">
+      Photo File
+    </label> -->
+
+    <%= label_tag(:photo_file, nil, :class => "col-sm-2 control-label") %>
+
+    <div class="col-sm-10">
+
+      <!-- <input type="file" id="photo_file" name="photo_file" class="form-control"> -->
+
+      <%= file_field_tag :photo_file, :class => "form-control" %>
+
     </div>
   </div>
 
   <!-- Label and input for caption -->
   <div class="form-group">
-    <label for="caption" class="col-sm-2 control-label">
+
+<!--<label for="caption" class="col-sm-2 control-label">
       Caption
-    </label>
+    </label> -->
+
+    <%= label_tag :caption, nil, :class => "col-sm-2 control-label" %>
+
     <div class="col-sm-10">
-      <input type="text" id="caption" name="caption" placeholder="Caption" class="form-control" value="<%= @photo.caption %>">
+
+<!--  <input type="text" id="caption" name="caption" placeholder="Caption" class="form-control" value="<%= @photo.caption %>"> -->
+
+      <%= text_field_tag :caption, @photo.caption, :class => "form-control", :placeholder => "Caption" %>
     </div>
   </div>
 
-  <!-- Label and input for user_id -->
-  <div class="form-group">
-    <label for="user_id" class="col-sm-2 control-label">
-      User
-    </label>
-    <div class="col-sm-10">
-      <input type="text" id="user_id" name="user_id" placeholder="User" class="form-control" value="<%= @photo.user_id %>">
-      <select name="user_id" id="user_id" class="form-control">
-        <% User.all.each do |user| %>
-          <option value="<%= user.id %>" <%= "selected" if @photo.user_id == user.id %>><%= user.username %></option>
-        <% end %>
-      </select>
+<!--<input type="hidden" name="user_id" value="<%= current_user.id %>"> -->
 
-      <%= select_tag(:user_id, options_from_collection_for_select(User.all, :id, :username, @photo.user_id), :class => "form-control") %>
-
-    </div>
-  </div>
+  <%= hidden_field_tag :user_id, current_user.id %>
 
   <div class="form-group">
     <div class="col-sm-offset-2 col-sm-10">
-      <input type="submit" value="Update Photo" class="btn btn-primary">
+
+      <!-- <input type="submit" value="Create Photo" class="btn btn-primary"> -->
+
+      <%= submit_tag "Update Photo", :class => "btn btn-primary" %>
       or
-      <!-- <a href="/photos/<%= @photo.id %>">Cancel</a> -->
-      <%= link_to("Cancel", :back) %>
+      <%= link_to "Cancel", :back %>
+
     </div>
   </div>
-</form>
+
+<% end %>
+
+<!-- </form> -->
