@@ -12,7 +12,9 @@
 <% end %>
 
 
-<form action="/create_photo" class="form-horizontal" method="post" enctype="multipart/form-data">
+<!-- <form action="/create_photo" class="form-horizontal" method="post" enctype="multipart/form-data">
+ -->
+<%= form_tag("/create_photo", :class => "form-horizontal", :enctype => "multipart/form-data") do %>
 
   <!-- Label and input for image_url -->
   <div class="form-group">
@@ -80,7 +82,10 @@
 
     </div>
   </div>
-</form>
+
+<% end %>
+
+<!-- </form> -->
 
 
 
