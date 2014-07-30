@@ -46,14 +46,13 @@
                   <i class="fa fa-trash-o"></i>
                 </a> -->
                 <%= link_to("<i class=\"fa fa-trash-o\"></i>".html_safe,
-                            delete_photo_url(photo),
+                            photo_url(photo),
                             :class => "btn btn-danger",
                             :method => "delete",
                             :data => { :confirm => "Are you suuuuuuure?" }) %>
               <% end %>
 
               <% if current_user.favorite_photos.include?(photo) %>
-                <!-- Homework: Make this into a link that, when clicked, un-favorites the photo -->
                 <% favoriting = Favoriting.find_by({ :user_id => current_user.id, :photo_id => photo.id }) %>
                 <%= link_to("<i class=\"fa fa-heart\"></i>".html_safe,
                             "/delete_favoriting/#{favoriting.id}", :class => "btn btn-default active") %>
