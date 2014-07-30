@@ -13,12 +13,12 @@ module ApplicationHelper
 
   end
 
-  # Define a method that returns a string like: '/photos/:id'
+  # Define a method that returns a string like: '/photos/6' (based on the id of the object passed in)
   def photo_url(object)
 
   end
 
-  # Define a method that returns a string like: '/photos/:id/edit'
+  # Define a method that returns a string like: '/photos/6/edit' (based on the id of the object passed in)
   def edit_photo_url(object)
 
   end
