@@ -1,5 +1,7 @@
 class Photo < ActiveRecord::Base
 
+  validates :caption, :presence => true
+
   mount_uploader :photo_file, PhotoFileUploader
 
   # belongs to one user (the owner)
