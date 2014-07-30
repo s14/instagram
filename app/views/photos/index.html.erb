@@ -50,14 +50,14 @@
               <% end %>
 
               <% if current_user.favorite_photos.include?(photo) %>
-                <a href="/create_favoriting?user_id=<%= current_user.id %>&photo_id=<%= photo.id %>" class="btn btn-success">
-                  <i class="fa fa-heart-o"></i>
-                </a>
-              <% else %>
                 <!-- Homework: Make this into a link that, when clicked, un-favorites the photo -->
                 <span class="btn btn-default active">
                   <i class="fa fa-heart"></i>
                 </span>
+              <% else %>
+                <a href="/create_favoriting?user_id=<%= current_user.id %>&photo_id=<%= photo.id %>" class="btn btn-success">
+                  <i class="fa fa-heart-o"></i>
+                </a>
               <% end %>
             </div>
 
