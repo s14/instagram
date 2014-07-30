@@ -55,7 +55,7 @@
       <input type="submit" value="Update Photo" class="btn btn-primary">
       or
       <!-- <a href="/photos/<%= @photo.id %>">Cancel</a> -->
-      <%= link_to("Cancel", "/photos/#{@photo.id}") %>
+      <%= link_to("Cancel", :back) %>
     </div>
   </div>
 </form>

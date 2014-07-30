@@ -25,7 +25,8 @@
     </div>
     <div class="col-md-6 well">
       <div class="thumbnail">
-        <img src="<%= photo.photo_file %>">
+        <!-- <img src="<%= photo.photo_file %>"> -->
+        <%= image_tag(photo.photo_file) %>
         <div class="caption">
           <p class="lead"><%= photo.caption %></p>
           <p>
@@ -51,31 +52,25 @@
 
               <% if current_user.favorite_photos.include?(photo) %>
                 <!-- Homework: Make this into a link that, when clicked, un-favorites the photo -->
-                <span class="btn btn-default active">
-                  <i class="fa fa-heart"></i>
-                </span>
+                <% favoriting = Favoriting.find_by({ :user_id => current_user.id, :photo_id => photo.id }) %>
+                <%= link_to("<i class=\"fa fa-heart\"></i>".html_safe,
+                            "/delete_favoriting/#{favoriting.id}", :class => "btn btn-default active") %>
               <% else %>
-                <a href="/create_favoriting?user_id=<%= current_user.id %>&photo_id=<%= photo.id %>" class="btn btn-success">
-                  <i class="fa fa-heart-o"></i>
-                </a>
+                <%= link_to("<i class=\"fa fa-heart-o\"></i>".html_safe,
+                            "/create_favoriting?user_id=#{current_user.id}&photo_id=#{photo.id}",
+                            :class => "btn btn-success") %>
               <% end %>
             </div>
-
-<!--        <form action="/create_favoriting">
-              <input name="user_id" type="hidden" value="<%= current_user.id %>">
-              <input name="photo_id" type="hidden" value="<%= photo.id %>">
-
-              <button class="btn btn-success"><i class="fa fa-heart-o"></i></button>
-            </form> -->
           </p>
         </div>
       </div>
       <ul class="media-list">
         <% photo.comments.each do |comment| %>
           <li class="media">
-            <a class="pull-left" href="/users/2">
+<!--        <a class="pull-left" href="/users/<%= comment.user.id %>">
               <img class="media-object" src="<%= comment.user.avatar_url %>">
-            </a>
+            </a> -->
+            <%= link_to(image_tag(comment.user.avatar_url, :class => "media-object"), "/users/#{comment.user.id}") %>
             <div class="media-body">
               <p class="lead"><%= comment.content %></p>
             </div>

@@ -45,6 +45,6 @@ class FavoritingsController < ApplicationController
 
     @favoriting.destroy
 
-    redirect_to "/favoritings", :notice => "Favoriting deleted."
+    redirect_to :back, :notice => "Favoriting deleted."
   end
 end
