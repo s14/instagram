@@ -2,8 +2,6 @@ class UsersController < ApplicationController
   def timeline
     @photos = current_user.timeline_including_favorites.order("created_at DESC")
 
-
-
     respond_to do |format|
       format.html do
         render('photos/my_timeline')

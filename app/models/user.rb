@@ -3,38 +3,24 @@ class User < ActiveRecord::Base
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
-  validates :username, :uniqueness => true
 
-  has_many(:own_photos, { :class_name => "Photo", :foreign_key => "user_id" })
-  has_many(:comments)
-  has_many(:favoritings)
+  validates :username, :uniqueness => true, :presence => true
 
-  # has many favorite_photos
-  def favorite_photos
-    return Photo.where({ :id => self.favoritings.pluck(:photo_id) })
-  end
+  has_many :own_photos, :class_name => "Photo", :foreign_key => "user_id"
+  has_many :comments
 
-  has_many(:followings_where_leader, { :class_name => "Following", :foreign_key => "leader_id" })
+  has_many :favoritings
+  has_many :favorite_photos, :through => :favoritings, :source => :photo
 
-  # has many followers
-  def followers
-    return User.where({ :id => self.followings_where_leader.pluck(:follower_id) })
-  end
+  has_many :followings_where_leader, :class_name => "Following", :foreign_key => "leader_id"
+  has_many :followers, :through => :followings_where_leader
 
-  has_many(:followings_where_follower, { :class_name => "Following", :foreign_key => "follower_id" })
+  has_many :followings_where_follower, :class_name => "Following", :foreign_key => "follower_id"
+  has_many :leaders, :through => :followings_where_follower
 
-  # has many leaders
-  def leaders
-    return User.where({ :id => self.followings_where_follower.pluck(:leader_id) })
-  end
+  has_many :timeline, :through => :leaders, :source => :own_photos
+  has_many :leaders_favorites, :through => :leaders, :source => :favorite_photos
 
-  # Homework
-
-  def timeline
-    # This method should return all the photos that belong to
-    #   my leaders (users that I follow)
-    return Photo.where({ :user_id => self.leaders.pluck(:id) })
-  end
 
   # CHALLENGE
   def timeline_including_favorites
@@ -43,7 +29,7 @@ class User < ActiveRecord::Base
     #   have favorited as well.
 
     leaders_own_photos_ids = self.timeline.pluck(:id)
-    leaders_favorite_photos_ids = Favoriting.where({ :user_id => self.leaders.pluck(:id) }).pluck(:photo_id)
+    leaders_favorite_photos_ids = self.leaders_favorites.pluck(:id)
 
     photo_id_array = leaders_own_photos_ids + leaders_favorite_photos_ids
 
