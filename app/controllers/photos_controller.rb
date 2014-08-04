@@ -13,7 +13,7 @@ class PhotosController < ApplicationController
 
   def ensure_current_user_is_photo_owner
     if current_user != @photo.owner || current_user.email != "raghu@example.com"
-      redirect_to "/", :notice => "Nice try, suckah!"
+      redirect_to root_url, :notice => "Nice try, suckah!"
     end
   end
 
@@ -23,6 +23,16 @@ class PhotosController < ApplicationController
 
   def index
     @photos = Photo.all.order("created_at DESC")
+
+    respond_to do |format|
+      format.html do
+        render('index')
+      end
+
+      format.json do
+        render(:json => @photos)
+      end
+    end
   end
 
   def show
@@ -33,14 +43,12 @@ class PhotosController < ApplicationController
   end
 
   def create
-    @photo = Photo.new
-    @photo.image_url = params[:image_url]
-    @photo.photo_file = params[:photo_file]
-    @photo.caption = params[:caption]
+    @photo = Photo.new(photo_params)
+
     @photo.user_id = current_user.id
 
     if @photo.save
-      redirect_to "/photos", :notice => "Photo created successfully."
+      redirect_to photos_url, :notice => "Photo created successfully."
     else
       render 'new'
     end
@@ -50,12 +58,12 @@ class PhotosController < ApplicationController
   end
 
   def update
-    @photo.photo_file = params[:photo_file]
-    @photo.caption = params[:caption]
-    @photo.user_id = params[:user_id]
+    @photo.update_attributes(photo_params)
+
+    @photo.user_id = current_user.id
 
     if @photo.save
-      redirect_to "/photos", :notice => "Photo updated successfully."
+      redirect_to photos_url, :notice => "Photo updated successfully."
     else
       render 'edit'
     end
@@ -64,6 +72,10 @@ class PhotosController < ApplicationController
   def destroy
     @photo.destroy
 
-    redirect_to "/photos", :notice => "Photo deleted."
+    redirect_to photos_url, :notice => "Photo deleted."
+  end
+
+  def photo_params
+    return params[:photo].permit(:caption, :photo_file)
   end
 end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140728160731) do
+ActiveRecord::Schema.define(version: 20140801141558) do
 
   create_table "comments", force: true do |t|
     t.string   "content"
@@ -36,7 +36,6 @@ ActiveRecord::Schema.define(version: 20140728160731) do
   end
 
   create_table "photos", force: true do |t|
-    t.string   "image_url"
     t.string   "caption"
     t.integer  "user_id"
     t.datetime "created_at"

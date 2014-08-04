@@ -1,15 +1,31 @@
 Rails.application.routes.draw do
+  resources :pictures
+
   get("/my_timeline", { :controller => "users", :action => "timeline" })
   get("/my_favorites", { :controller => "users", :action => "favorites" })
 
   devise_for :users
   root "photos#index"
 
+  resources :photos
+  resources :comments
+  resources :favoritings
+  resources :followings
+  resources :users
+
+
+
+
+
+
+
+
   # Routes for the Following resource:
   # CREATE
   get '/followings/new' => 'followings#new'
 
   get('/create_following', { :controller => 'followings', :action => 'create' })
+  post('/followings', { :controller => 'followings', :action => 'create' })
 
   # READ
   get('/followings', { :controller => 'followings', :action => 'index' })
@@ -79,18 +95,13 @@ Rails.application.routes.draw do
   # This is the pattern we will follow from now on.
 
   # Routes for the Photo resource:
-  # CREATE
-  get('/photos/new', { :controller => 'photos', :action => 'new' })
-  post('/photos', { :controller => 'photos', :action => 'create' })
-
-  # READ
-  get('/photos', { :controller => 'photos', :action => 'index' })
-  get('/photos/:id', { :controller => 'photos', :action => 'show' })
-
-  # UPDATE
-  get('/photos/:id/edit', { :controller => 'photos', :action => 'edit' })
-  patch('/photos/:id', { :controller => 'photos', :action => 'update' })
-
-  # DELETE
-  delete('/photos/:id', { :controller => 'photos', :action => 'destroy' })
+  resources(:zebras)
 end
+
+
+
+
+
+
+
+

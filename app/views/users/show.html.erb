@@ -1,3 +1,10 @@
+<h1><%= root_url({ :sport => "football", :fruit => "cookies" }) %></h1>
+<h1><%= comments_url({ :sport => "football", :fruit => "cookies" }) %></h1>
+<h1><%= new_photo_url %></h1>
+<h1><%= followings_url({ :sport => "football", :fruit => "cookies" }) %></h1>
+
+
+
 <!-- Optional Homework: Make this user profile page look good. Include the user's own photos. -->
 
 <!-- Homework: Add a "Follow" button to this user's profile. Make it work. -->
@@ -24,6 +31,8 @@
       </form> -->
     <% else %>
       <a href="/create_following?follower_id=<%= current_user.id %>&leader_id=<%= @user.id %>" class="btn btn-success btn-lg">Follow</a>
+
+      <%= link_to "Follow", followings_url({ :follower_id => current_user.id, :leader_id => @user.id }), :class => "btn btn-success", :method => "post" %>
 
 <!--       <form action="/create_following">
         <input type="hidden" name="follower_id" value="<%= current_user.id %>">

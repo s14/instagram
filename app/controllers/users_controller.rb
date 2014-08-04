@@ -2,13 +2,31 @@ class UsersController < ApplicationController
   def timeline
     @photos = current_user.timeline_including_favorites.order("created_at DESC")
 
-    render('photos/index')
+
+
+    respond_to do |format|
+      format.html do
+        render('photos/my_timeline')
+      end
+
+      format.json do
+        render(:json => @photos)
+      end
+    end
   end
 
   def favorites
     @photos = current_user.favorite_photos.order("created_at DESC")
 
-    render('photos/index')
+    respond_to do |format|
+      format.html do
+        render('photos/my_favorites')
+      end
+
+      format.json do
+        render(:json => @photos)
+      end
+    end
   end
 
   def index
