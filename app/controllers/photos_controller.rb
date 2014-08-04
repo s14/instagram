@@ -70,6 +70,8 @@ class PhotosController < ApplicationController
   end
 
   def destroy
+    @photo.cleanup_comments
+
     @photo.destroy
 
     redirect_to photos_url, :notice => "Photo deleted."
