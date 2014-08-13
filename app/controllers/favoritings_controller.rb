@@ -17,6 +17,11 @@ class FavoritingsController < ApplicationController
     @favoriting.photo_id = params[:photo_id]
 
     if @favoriting.save
+      # send an email to the owner of the photo
+      #   that was favorited
+
+      UserMailer.favorite_notification(@favoriting).deliver
+
       redirect_to :back, :notice => "Photo added to your favorites!"
     else
       render 'new'

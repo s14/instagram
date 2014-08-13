@@ -4,7 +4,7 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
-  validates :username, :uniqueness => true, :presence => true
+  # validates :username, :uniqueness => true, :presence => true
 
   has_many :own_photos, :class_name => "Photo", :foreign_key => "user_id"
   has_many :comments
