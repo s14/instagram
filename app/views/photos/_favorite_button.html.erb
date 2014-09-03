@@ -1,0 +1,6 @@
+<%= link_to("<i class=\"fa fa-heart-o\"></i>".html_safe,
+            favoritings_url(:photo_id => the_photo.id),
+            :method => "post",
+            :class => "btn btn-success",
+            :remote => true,
+            :id => "favorite_photo_button_#{the_photo.id}") %>

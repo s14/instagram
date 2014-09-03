@@ -22,7 +22,13 @@ class FavoritingsController < ApplicationController
 
       UserMailer.favorite_notification(@favoriting).deliver
 
-      redirect_to :back, :notice => "Photo added to your favorites!"
+      respond_to do |format|
+
+        format.html { redirect_to :back, :notice => "Photo added to your favorites!" }
+
+        format.js
+      end
+
     else
       render 'new'
     end
@@ -50,6 +56,9 @@ class FavoritingsController < ApplicationController
 
     @favoriting.destroy
 
-    redirect_to :back, :notice => "Favoriting deleted."
+    respond_to do |format|
+      format.html { redirect_to :back, :notice => "Favoriting deleted." }
+      format.js
+    end
   end
 end

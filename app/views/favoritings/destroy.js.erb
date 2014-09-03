@@ -1,0 +1,3 @@
+$('#favorite_photo_button_<%= @favoriting.photo.id %>').fadeOut(function() {
+  $(this).replaceWith('<%= j(render('photos/favorite_button', :the_photo => @favoriting.photo)) %>');
+});

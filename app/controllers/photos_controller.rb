@@ -12,7 +12,7 @@ class PhotosController < ApplicationController
   # end
 
   def ensure_current_user_is_photo_owner
-    if current_user != @photo.owner || current_user.email != "raghu@example.com"
+    unless current_user == @photo.owner || current_user.email == "raghu@example.com"
       redirect_to root_url, :notice => "Nice try, suckah!"
     end
   end
@@ -70,11 +70,13 @@ class PhotosController < ApplicationController
   end
 
   def destroy
-    @photo.cleanup_comments
-
     @photo.destroy
 
-    redirect_to photos_url, :notice => "Photo deleted."
+    respond_to do |format|
+      format.html { redirect_to photos_url, :notice => "Photo deleted." }
+      format.js
+    end
+
   end
 
   def photo_params

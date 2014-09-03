@@ -1,0 +1,7 @@
+<% favoriting = Favoriting.find_by({ :user_id => current_user.id, :photo_id => the_photo.id }) %>
+<%= link_to("<i class=\"fa fa-heart\"></i>".html_safe,
+            favoriting_url(favoriting.id),
+            :method => "delete",
+            :class => "btn btn-default active",
+            :remote => true,
+            :id => "favorite_photo_button_#{the_photo.id}") %>
